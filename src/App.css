@@ -1,3 +1,14 @@
 #root{
     width: 80%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#chat-container{
+    border: solid 1px black;
+    margin: 5%;
+    padding: 20px;
+    height: 80%;
 }
