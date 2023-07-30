@@ -1,26 +1,29 @@
-import './App.css';
 import React, { Component } from 'react';
+import './App.css';
 import Header from './components/header.js'
 import ChatHistory from './components/ChatHistory/ChatHistory';
 import ChatInput from './components/ChatInput/ChatInput';
-import { connect, sendMessage } from './api/index'
+import { connect, sendMessage } from './api/index';
 
 export default class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       chatHistory: []
-    }
+    };
+    this.connected = false;
   }
 
   componentDidMount() {
-    connect((message) => {
-      console.log("New Message")
-      this.setState(prevState => ({
-        chatHistory: [...prevState.chatHistory, message]
-      }))
-      console.log(this.state);
-    });
+    if (!this.connected) { // connect only if not already connected
+      connect((message) => {
+        console.log("New Message", message);
+        this.setState((prevState) => ({
+          chatHistory: [...prevState.chatHistory, message]
+        }));
+      });
+      this.connected = true;
+    }
   }
 
   send(event) {
@@ -36,6 +39,6 @@ export default class App extends Component {
         <ChatHistory chatHistory={this.state.chatHistory} />
         <ChatInput send={this.send} />
       </div>
-    )
+    );
   }
 }

@@ -1,23 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Message.scss';
 
-class Message extends Component {
-    constructor(props) {
-        super(props);
-        let temp = JSON.parse(this.props.message);
-        this.state = {
-            message: temp
-        }
-    }
-
-    render() {
-        return (
-            <div className='Message'>
-                {this.state.message.body}
-            </div>
-        );
-    };
-
-}
+const Message = ({ content }) => {
+    return (
+        <div className='Message'>
+            {content}
+        </div>
+    );
+};
 
 export default Message;

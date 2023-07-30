@@ -4,7 +4,7 @@ const io = require('socket.io')(http, {
     cors: {
         origin: 'http://localhost:3000',
         methods: ['GET', 'POST'],
-        credentials: true, // Set to true to allow cookies or other credentials with requests
+        credentials: true, // to true to allow cookies or other credentials with requests
     },
 });
 
@@ -13,7 +13,7 @@ io.on('connection', (socket) => {
 
     socket.on('message', (message) => {
         console.log(message);
-        io.emit('message', message); // TODO something wrong here I guess
+        io.emit('message', message);
     });
 
     socket.on('disconnect', () => {

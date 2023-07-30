@@ -1,37 +1,31 @@
 import { io } from 'socket.io-client';
 
-
-// var socket = new WebSocket('ws://localhost:8080/ws')
-
-// updated chatgpt
-
 const socket = io('http://localhost:5000', {
-    withCredentials: true, // Add any additional configuration here if needed
+    withCredentials: true,
 });
 
-// 
+export let connect = (onMessageReceived) => {
+    console.log('connecting');
 
-export let connect = () => {
-    console.log('connecting')
+    socket.on('connect', () => {
+        console.log('successfully connected');
+    });
 
-    socket.onopen = () => {
-        console.log('successfully connected')
-    }
-
-    socket.onmessage = (message) => {
+    socket.on('message', (message) => {
         console.log('Received message', message);
-    };
+        onMessageReceived(message); // call the callback function with the received message
+    });
 
-    socket.onclose = (e) => {
-        console.log('socket closed connection:', e)
-    }
+    socket.on('disconnect', () => {
+        console.log('socket disconnected');
+    });
 
-    socket.onerror = (err) => {
-        console.log('sockt error:', err)
-    }
-}
+    socket.on('error', (err) => {
+        console.log('socket error:', err);
+    });
+};
 
 export let sendMessage = (message) => {
-    console.log('sending message', message)
-    socket.send(message)
-}
+    console.log('sending message', message);
+    socket.emit('message', message);
+};
