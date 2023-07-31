@@ -12,6 +12,7 @@ export default class App extends Component {
       chatHistory: []
     };
     this.connected = false;
+    // this.chatContainerRef = React.createRef();
   }
 
   componentDidMount() {
@@ -23,6 +24,28 @@ export default class App extends Component {
         }));
       });
       this.connected = true;
+    }
+  }
+
+  // TODO: scrolling of history container
+  // componentDidUpdate(prevProps, prevState) {
+  //   // Check if new message is added before scrolling
+  //   if (prevState.chatHistory.length !== this.state.chatHistory.length) {
+  //     this.scrollToBottom();
+  //   }
+  // }
+
+  // scrollToBottom() {
+  //   // Use the ref to access the chat container DOM element and scroll to the bottom
+  //   if (this.chatContainerRef.current) {
+  //     this.chatContainerRef.current.scrollTop = this.chatContainerRef.current.scrollHeight;
+  //   }
+  // }
+
+  scrollToBottom() {
+    // Use the ref to access the chat container DOM element and scroll to the bottom
+    if (this.chatContainerRef.current) {
+      this.chatContainerRef.current.scrollTop = this.chatContainerRef.current.scrollHeight;
     }
   }
 

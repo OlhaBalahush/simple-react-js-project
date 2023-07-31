@@ -1,3 +1,8 @@
-#chat-history{
+#chat-history {
     height: 90%;
+    overflow-y: scroll;
+}
+
+#chat-history * {
+    overflow-anchor: none;
 }
